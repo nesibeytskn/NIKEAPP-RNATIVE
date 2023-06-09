@@ -32,13 +32,12 @@ const ProductDetailsScreen = () => {
           pagingEnabled
         />
 
-        <View style={{ padding: 20 }}>
+        <View style={{ padding: 20, paddingBottom:100 }}>
           <Text style={styles.title}>{product.name}</Text>
           <Text style={styles.price}>${product.price}</Text>
           <Text style={styles.description}>{product.description}</Text>
         </View>
       </ScrollView>
-
       <Pressable onPress={addToCart} style={styles.button}>
         <Text style={styles.buttonText}>Add to cart</Text>
       </Pressable>
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     bottom: 30,
     width: "90%",
     alignSelf: "center",
-    padding: 20,
+    padding: 15,
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
