@@ -6,41 +6,52 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import cart from "../data/cart";
+
 import CartListItem from "../components/CartListItem";
+import { useSelector } from "react-redux";
+import {
+  selectDeliveryPrice,
+  selectSubtotal,
+  selectTotal,
+} from "../store/cartSlice";
 
-const ShoppingCartTotals = () => (
-  <View style={styles.totalsContainer}>
-    <View style={styles.row}>
-      <Text style={styles.text}>Subtotal</Text>
-      <Text style={styles.text}>410,00 USD</Text>
-    </View>
-    <View style={styles.row}>
-      <Text style={styles.text}>Delivery</Text>
-      <Text style={styles.text}>10,00 USD</Text>
-    </View>
+const ShoppingCartTotals = () => {
+  const subtotal = useSelector(selectSubtotal);
+  const deliveryFee = useSelector(selectDeliveryPrice);
+  const Total = useSelector(selectTotal);
+  return (
+    <View style={styles.totalsContainer}>
+      <View style={styles.row}>
+        <Text style={styles.text}>Subtotal</Text>
+        <Text style={styles.text}>{subtotal}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.text}>Delivery</Text>
+        <Text style={styles.text}>{deliveryFee}USD</Text>
+      </View>
 
-    <View style={styles.row}>
-      <Text style={styles.textBold}>Total</Text>
-      <Text style={styles.textBold}>420,00 USD</Text>
+      <View style={styles.row}>
+        <Text style={styles.textBold}>Total</Text>
+        <Text style={styles.textBold}>{Total}USD</Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const ShoppingCart = () => {
+  const cartItems = useSelector((state) => state.cart.items);
   return (
     <>
       <ScrollView>
         <FlatList
-          data={cart}
+          data={cartItems}
           renderItem={({ item }) => <CartListItem cartItem={item} />}
           ListFooterComponent={ShoppingCartTotals}
         />
-
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Checkout</Text>
-        </Pressable>
       </ScrollView>
+      <Pressable style={styles.button}>
+        <Text style={styles.buttonText}>Checkout</Text>
+      </Pressable>
     </>
   );
 };

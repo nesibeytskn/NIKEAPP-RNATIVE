@@ -9,14 +9,16 @@ import {
   Pressable,
 } from "react-native";
 import products from "../data/products";
+import { useSelector, useDispatch } from "react-redux";
+import { cartSlice } from "../store/cartSlice";
 
 const ProductDetailsScreen = () => {
-  const product = products[0];
-
+  const product = useSelector((state) => state.products.selectedProduct);
+  const dispatch = useDispatch();
   const { width } = useWindowDimensions();
 
   const addToCart = () => {
-    console.warn("Add to cart");
+    dispatch(cartSlice.actions.addCartItem({ product }));
   };
 
   return (
@@ -32,7 +34,7 @@ const ProductDetailsScreen = () => {
           pagingEnabled
         />
 
-        <View style={{ padding: 20, paddingBottom:100 }}>
+        <View style={{ padding: 20, paddingBottom: 100 }}>
           <Text style={styles.title}>{product.name}</Text>
           <Text style={styles.price}>${product.price}</Text>
           <Text style={styles.description}>{product.description}</Text>
