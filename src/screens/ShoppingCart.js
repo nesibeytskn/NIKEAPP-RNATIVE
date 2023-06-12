@@ -42,13 +42,15 @@ const ShoppingCart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   return (
     <>
-      <ScrollView>
+    
+      
         <FlatList
           data={cartItems}
           renderItem={({ item }) => <CartListItem cartItem={item} />}
           ListFooterComponent={ShoppingCartTotals}
         />
-      </ScrollView>
+      
+     
       <Pressable style={styles.button}>
         <Text style={styles.buttonText}>Checkout</Text>
       </Pressable>
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderColor: "gainsboro",
     borderTopWidth: 1,
+    paddingBottom:80,
   },
   row: {
     flexDirection: "row",
